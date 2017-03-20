@@ -4,7 +4,7 @@
  * Date: 17-3-20
  * Time: 下午1:53
  */
-namespace Component\Captcha\Interfaces;
+namespace Captcha\Interfaces;
 
 use Doctrine\Common\Cache\Cache;
 
