@@ -1,5 +1,5 @@
 <?php
-namespace Component\Captcha;
+namespace Captcha;
 
 use Symfony\Component\Finder\Finder;
 

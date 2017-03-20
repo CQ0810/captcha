@@ -1,7 +1,7 @@
 <?php
-namespace Component\Captcha;
+namespace Captcha;
 
-use Component\Captcha\Interfaces\PhraseBuilderInterface;
+use Captcha\Interfaces\PhraseBuilderInterface;
 
 /**
  * Generates random phrase

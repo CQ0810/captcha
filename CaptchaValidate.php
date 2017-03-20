@@ -5,9 +5,9 @@
  * Time: 下午1:52
  */
 
-namespace Component\Captcha;
+namespace Captcha;
 
-use Component\Captcha\Interfaces\CaptchaValidateInterface;
+use Captcha\Interfaces\CaptchaValidateInterface;
 use Doctrine\Common\Cache\Cache;
 
 class CaptchaValidate implements CaptchaValidateInterface

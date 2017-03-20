@@ -1,5 +1,5 @@
 <?php
-namespace Component\Captcha\Interfaces;
+namespace Captcha\Interfaces;
 
 /**
  * A Captcha builder

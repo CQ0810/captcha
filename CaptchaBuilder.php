@@ -1,8 +1,8 @@
 <?php
-namespace Component\Captcha;
+namespace Captcha;
 
-use Component\Captcha\Interfaces\CaptchaBuilderInterface;
-use Component\Captcha\Interfaces\PhraseBuilderInterface;
+use Captcha\Interfaces\CaptchaBuilderInterface;
+use Captcha\Interfaces\PhraseBuilderInterface;
 use Doctrine\Common\Cache\Cache;
 use \Exception;
 
