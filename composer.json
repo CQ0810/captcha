@@ -1,0 +1,21 @@
+{
+  "name": "macro/captcha",
+  "description": "通用验证码组件",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Macro Chen",
+      "email": "chen_macro@163.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "doctrine/cache": "~1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Captcha\\": ""
+    }
+  }
+}
