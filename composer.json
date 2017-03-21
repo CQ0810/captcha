@@ -1,5 +1,5 @@
 {
-  "name": "macro/captcha",
+  "name": "artful/captcha",
   "description": "通用验证码组件",
   "license": "proprietary",
   "authors": [
