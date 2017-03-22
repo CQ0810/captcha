@@ -4,6 +4,7 @@ namespace Captcha;
 use Captcha\Interfaces\CaptchaBuilderInterface;
 use Captcha\Interfaces\PhraseBuilderInterface;
 use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\FilesystemCache;
 use \Exception;
 
 /**
@@ -129,7 +130,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     public function __construct($phrase = null, Cache $cache = null, PhraseBuilderInterface $builder = null)
     {
         $builder === null ? $this->builder = new PhraseBuilder : $this->builder = $builder;
-        $cache === null ? $this->cache = app()->component('captcha_cache') : $this->cache = $cache;
+        $cache === null ? $this->cache = new FilesystemCache(sys_get_temp_dir()) : $this->cache = $cache;
         if ($phrase === null) {
             $phrase = $this->builder->build();
         }
@@ -488,7 +489,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
             $this->postEffect($image);
         }
         $this->contents = $image;
-        $this->cache->save(md5($phrase), $phrase);
+        $this->cache->save(md5($this->phrase), $this->phrase);
         return $this;
     }
 
