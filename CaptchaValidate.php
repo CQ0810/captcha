@@ -9,6 +9,7 @@ namespace Captcha;
 
 use Captcha\Interfaces\CaptchaValidateInterface;
 use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\FilesystemCache;
 
 class CaptchaValidate implements CaptchaValidateInterface
 {
@@ -20,16 +21,21 @@ class CaptchaValidate implements CaptchaValidateInterface
     /**
      * @param $phrase
      * @param Cache|null $cache
+     * @throws \Exception
      * @return boolean
      */
     public function validate($phrase, Cache $cache = null)
     {
-        $cache === null ? $this->cache = app()->component('captcha_cache') : $this->cache = $cache;
-        $id = md5($phrase);
-        if ($this->cache->fetch($id)) {
-            $this->cache->delete($id);
-            return true;
+        try {
+            $cache === null ? $this->cache = new FilesystemCache(sys_get_temp_dir()) : $this->cache = $cache;
+            $id = md5($phrase);
+            if ($this->cache->fetch($id)) {
+                $this->cache->delete($id);
+                return true;
+            }
+            return false;
+        } catch (\Exception $e) {
+            throw $e;
         }
-        return false;
     }
 }
