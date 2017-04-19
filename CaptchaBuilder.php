@@ -489,7 +489,8 @@ class CaptchaBuilder implements CaptchaBuilderInterface
             $this->postEffect($image);
         }
         $this->contents = $image;
-        $this->cache->save(md5($this->phrase), $this->phrase);
+        $lifeTime = function_exists('app') ? app()->config('app.captcha_lifetime', 60) : 60;
+        $this->cache->save(md5($this->phrase), $this->phrase, $lifeTime);
         return $this;
     }
 
