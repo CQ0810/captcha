@@ -241,13 +241,15 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     /**
      * Instantiation
      *
-     * @param null $phrase
+     * @param array $params
      * @throws Exception
      * @return CaptchaBuilder
      */
-    public static function create($phrase = null)
+    public static function create(array $params = [])
     {
-        return new self($phrase);
+        $phrase = isset($params['phrase']) ? $params['phrase'] : null;
+        $cache = isset($params['cache']) ? $params['cache'] : null;
+        return new self($phrase, $cache);
     }
 
     /**
