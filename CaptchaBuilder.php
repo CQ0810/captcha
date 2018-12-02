@@ -107,7 +107,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     /**
      * Temporary dir, for OCR check
      */
-    protected $tempDir = APP_PATH . '/log/temp/';
+    protected $tempDir = '/temp/';
 
     /**
      * 缓存
@@ -432,31 +432,17 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     }
 
     /**
-     * Builds while the code is readable against an OCR
-     *
-     * @param int  $width
-     * @param int  $height
-     * @param null $font
-     * @param null $fingerprint
-     */
-    public function buildAgainstOCR($width = 150, $height = 40, $font = null, $fingerprint = null)
-    {
-        do {
-            $this->build($width, $height, $font, $fingerprint);
-        } while ($this->isOCRReadable());
-    }
-
-    /**
      * Generate the image
      *
      * @param int    $width
      * @param int    $height
+     * @param int    $lifeTime
      * @param string $font
      * @param null   $fingerprint
      *
      * @return $this
      */
-    public function build($width = 150, $height = 40, $font = '', $fingerprint = null)
+    public function build($width = 150, $height = 40, $lifeTime = 120, $font = '', $fingerprint = null)
     {
         if (null !== $fingerprint) {
             $this->fingerprint = $fingerprint;
@@ -515,9 +501,23 @@ class CaptchaBuilder implements CaptchaBuilderInterface
             $this->postEffect($image);
         }
         $this->contents = $image;
-        $lifeTime = function_exists('app') ? app()->config('app.captcha_lifetime', 60) : 60;
         $this->cache->save(md5($this->phrase), $this->phrase, $lifeTime);
         return $this;
+    }
+
+    /**
+     * Builds while the code is readable against an OCR
+     *
+     * @param int  $width
+     * @param int  $height
+     * @param null $font
+     * @param null $fingerprint
+     */
+    public function buildAgainstOCR($width = 150, $height = 40, $font = null, $fingerprint = null)
+    {
+        do {
+            $this->build($width, $height, $font, $fingerprint);
+        } while ($this->isOCRReadable());
     }
 
     /**
@@ -765,5 +765,16 @@ class CaptchaBuilder implements CaptchaBuilderInterface
         }
         return $image;
     }
+
+    /**
+     * 设置临时目录
+     *
+     * @param mixed $tempDir
+     */
+    public function setTempDir($tempDir): void
+    {
+        $this->tempDir = $tempDir;
+    }
 }
+
 
