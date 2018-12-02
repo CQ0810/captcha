@@ -1,4 +1,5 @@
 <?php
+
 namespace Captcha;
 
 use Captcha\Interfaces\CaptchaBuilderInterface;
@@ -122,9 +123,11 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * CaptchaBuilder constructor.
-     * @param string $phrase
-     * @param Cache $cache
+     *
+     * @param string                      $phrase
+     * @param Cache                       $cache
      * @param PhraseBuilderInterface|null $builder
+     *
      * @throws Exception
      */
     public function __construct($phrase = null, Cache $cache = null, PhraseBuilderInterface $builder = null)
@@ -170,7 +173,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Enables/disable distortion
+     *
      * @param $distortion
+     *
      * @return $this
      */
     public function setDistortion($distortion)
@@ -181,6 +186,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * @param $maxBehindLines
+     *
      * @return $this
      */
     public function setMaxBehindLines($maxBehindLines)
@@ -191,6 +197,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * @param $maxFrontLines
+     *
      * @return $this
      */
     public function setMaxFrontLines($maxFrontLines)
@@ -201,6 +208,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * @param $maxAngle
+     *
      * @return $this
      */
     public function setMaxAngle($maxAngle)
@@ -211,6 +219,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * @param $maxOffset
+     *
      * @return $this
      */
     public function setMaxOffset($maxOffset)
@@ -231,6 +240,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      * Returns true if the given phrase is good
      *
      * @param $phrase
+     *
      * @return bool
      */
     public function testPhrase($phrase)
@@ -242,6 +252,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      * Instantiation
      *
      * @param array $params
+     *
      * @throws Exception
      * @return CaptchaBuilder
      */
@@ -254,9 +265,11 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Sets the text color to use
+     *
      * @param $r
      * @param $g
      * @param $b
+     *
      * @return $this
      */
     public function setTextColor($r, $g, $b)
@@ -267,9 +280,11 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Sets the background color to use
+     *
      * @param $r
      * @param $g
      * @param $b
+     *
      * @return $this
      */
     public function setBackgroundColor($r, $g, $b)
@@ -282,6 +297,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      * Sets the ignoreAllEffects value
      *
      * @param bool $ignoreAllEffects
+     *
      * @return CaptchaBuilder
      */
     public function setIgnoreAllEffects($ignoreAllEffects)
@@ -292,7 +308,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Sets the list of background images to use (one image is randomly selected)
+     *
      * @param array $backgroundImages
+     *
      * @return $this
      */
     public function setBackgroundImages(array $backgroundImages)
@@ -303,9 +321,10 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Draw lines over the image
-     * @param $image
-     * @param $width
-     * @param $height
+     *
+     * @param       $image
+     * @param       $width
+     * @param       $height
      * @param mixed $col
      */
     protected function drawLine($image, $width, $height, $col = null)
@@ -353,11 +372,13 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Writes the phrase on the image
+     *
      * @param $image
      * @param $phrase
      * @param $font
      * @param $width
      * @param $height
+     *
      * @return int
      */
     protected function writePhrase($image, $phrase, $font, $width, $height)
@@ -412,8 +433,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Builds while the code is readable against an OCR
-     * @param int $width
-     * @param int $height
+     *
+     * @param int  $width
+     * @param int  $height
      * @param null $font
      * @param null $fingerprint
      */
@@ -426,10 +448,12 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Generate the image
-     * @param int $width
-     * @param int $height
+     *
+     * @param int    $width
+     * @param int    $height
      * @param string $font
-     * @param null $fingerprint
+     * @param null   $fingerprint
+     *
      * @return $this
      */
     public function build($width = 150, $height = 40, $font = '', $fingerprint = null)
@@ -543,7 +567,8 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Saves the Captcha to a jpeg file
-     * @param $filename
+     *
+     * @param     $filename
      * @param int $quality
      */
     public function save($filename, $quality = 90)
@@ -561,7 +586,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Gets the image contents
+     *
      * @param int $quality
+     *
      * @return string
      */
     public function get($quality = 90)
@@ -573,7 +600,9 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Gets the HTML inline base64
+     *
      * @param int $quality
+     *
      * @return string
      */
     public function inline($quality = 90)
@@ -583,6 +612,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
 
     /**
      * Outputs the image
+     *
      * @param int $quality
      */
     public function output($quality = 90)
@@ -601,8 +631,10 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     /**
      * Returns a random number or the next number in the
      * fingerprint
+     *
      * @param $min
      * @param $max
+     *
      * @return int|mixed
      */
     protected function rand($min, $max)
@@ -685,6 +717,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      * Validate the background image path. Return the image type if valid
      *
      * @param string $backgroundImage
+     *
      * @return string
      * @throws Exception
      */
@@ -710,6 +743,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      *
      * @param string $backgroundImage
      * @param string $imageType
+     *
      * @return resource
      * @throws Exception
      */
@@ -732,3 +766,4 @@ class CaptchaBuilder implements CaptchaBuilderInterface
         return $image;
     }
 }
+
